@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -20,7 +20,7 @@
         </div>
     </fieldset>
     <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey= fc796e1a9e4072d7a828202eed2ca289&libraries=services"></script>
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fc796e1a9e4072d7a828202eed2ca289&libraries=services"></script>
     <script>
         /*
          //샘플코드
@@ -94,11 +94,12 @@
                 infowindow.open(map, marker);
             });
         }
+        //개발자센터에서 "주소로 장소 표시하기" 로 검색
         //한글 주소로 지도 표시하기
         function searchByAddress() {
             //입력주소명 얻기
             var address = document.getElementById('address').value;
-            //주소로 장소 표시하기 로 검색
+
             // 주소-좌표 변환 객체를 생성합니다
             var geocoder = new kakao.maps.services.Geocoder();
             // 주소로 좌표를 검색합니다
@@ -106,23 +107,21 @@
 
                 // 정상적으로 검색이 완료됐으면 
                 if (status === kakao.maps.services.Status.OK) {
-                    var lat = result[0].y; //위도
-                    var lng = result[0].x; //경도
-
-                    setMarker(lat,lng,'<div style="padding:5px;"> '+ address +'</div>');
-
-                    // 인포윈도우로 장소에 대한 설명을 표시합니다
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-                    });
+                    var lat=result[0].y;//위도
+                    var lng=result[0].x;//경도
+                    
+                    setMarker(lat,lng,'<div style="padding:5px;">'+address+'</div>');
+              
 
                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                     map.setCenter(new kakao.maps.LatLng(lat,lng));
                 }
                 else{
-                    alter(address + '와 일치하는 주소가 없어요.');
+                    alert(address+'와 일치하는 주소가 없어요');
                 }
             });
+
+
         }
     </script>
 </body>
